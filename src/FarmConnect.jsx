@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Bell, TrendingUp, MapPin, Users, Smartphone, Star, ChevronRight, AlertCircle, DollarSign, Calendar, Truck } from 'lucide-react';
 
 const FarmConnect = () => {

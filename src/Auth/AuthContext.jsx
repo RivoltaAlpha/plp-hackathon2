@@ -93,8 +93,6 @@ export const AuthProvider = ({ children }) => {
     setError(null);
 
     try {
-      // In a real implementation, this would make an API call
-      // For demo purposes, we'll simulate a successful registration
       const { fullName, email, password, userType, ...additionalData } = userData;
       
       // Create user object

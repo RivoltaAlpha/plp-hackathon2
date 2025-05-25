@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { User, Mail, Lock, Phone, Home, Eye, EyeOff } from 'lucide-react';
 
 const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
