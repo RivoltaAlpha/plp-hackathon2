@@ -45,7 +45,8 @@ const FarmConnect = () => {
       demandLevel: "High",
       peakSeason: "Approaching",
       aiInsight: "School lunch programs increasing orders. Lock in contracts now for stable income."
-    }
+    },
+    
   ]);
 
   // Simulated real-time notifications
