@@ -1,178 +1,21 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Search, Filter, Heart, Star, MapPin, ShoppingCart } from 'lucide-react';
+import { useEffect } from "react";
 
-// Sample data for marketplace items
-const marketplaceItems = [
-    {
-        id: 1,
-        name: "Fresh Tomatoes",
-        image: "🍅",
-        seller: "Green Valley Farm",
-        location: "Springfield",
-        price: 2.5,
-        unit: "/lb",
-        quantity: "120 lbs",
-        rating: 4.8,
-        description: "Locally grown, juicy and ripe tomatoes picked this morning.",
-        harvestDate: "Harvested: May 24",
-    },
-    {
-        id: 2,
-        name: "Organic Carrots",
-        image: "🥕",
-        seller: "Sunrise Acres",
-        location: "Riverdale",
-        price: 1.8,
-        unit: "/lb",
-        quantity: "80 lbs",
-        rating: 4.6,
-        description: "Sweet, crunchy carrots grown without pesticides.",
-        harvestDate: "Harvested: May 23",
-    },
-    {
-        id: 3,
-        name: "Organic Potatoes",
-        seller: "Green Valley Farm",
-        price: 2.85,
-        unit: "per lb",
-        location: "2.3 miles away",
-        rating: 4.8,
-        image: "🥔",
-        category: "Vegetables",
-        description: "Fresh, organic heirloom potatoes harvested daily",
-        quantity: "500 lbs available",
-        harvestDate: "Today"
-    },
-    {
-        id: 4,
-        name: "Bell Peppers Mix",
-        seller: "Sunrise Organics",
-        price: 1.95,
-        unit: "per lb",
-        location: "4.1 miles away",
-        rating: 4.9,
-        image: "🫑",
-        category: "Vegetables",
-        description: "Colorful mix of red, yellow, and green bell peppers",
-        quantity: "300 lbs available",
-        harvestDate: "Yesterday"
-    },
-    {
-        id: 5,
-        name: "Baby Carrots",
-        seller: "Mountain View Farm",
-        price: 1.40,
-        unit: "per lb",
-        location: "6.7 miles away",
-        rating: 4.7,
-        image: "🥕",
-        category: "Vegetables",
-        description: "Sweet baby carrots, perfect for retail or restaurants",
-        quantity: "800 lbs available",
-        harvestDate: "2 days ago"
-    },
-    {
-        id: 6,
-        name: "Fresh Lettuce",
-        seller: "Organic Fields Co",
-        price: 1.25,
-        unit: "per head",
-        location: "1.8 miles away",
-        rating: 4.6,
-        image: "🥬",
-        category: "Leafy Greens",
-        description: "Crisp romaine and butter lettuce varieties",
-        quantity: "200 heads available",
-        harvestDate: "Today"
-    },
-    {
-        id: 7,
-        name: "Farm Eggs",
-        seller: "Happy Hens Farm",
-        price: 3.50,
-        unit: "per dozen",
-        location: "3.2 miles away",
-        rating: 4.9,
-        image: "🥚",
-        category: "Dairy & Eggs",
-        description: "Free-range eggs with rich, golden yolks.",
-        quantity: "60 dozen available",
-        harvestDate: "Collected: Today"
-    },
-    {
-        id: 8,
-        name: "Sweet Strawberries",
-        seller: "Berry Patch",
-        price: 4.00,
-        unit: "per lb",
-        location: "5.5 miles away",
-        rating: 4.8,
-        image: "🍓",
-        category: "Fruits",
-        description: "Juicy, sweet strawberries picked at peak ripeness.",
-        quantity: "100 lbs available",
-        harvestDate: "Harvested: Yesterday"
-    },
-    {
-        id: 9,
-        name: "Raw Honey",
-        seller: "Bee Natural",
-        price: 7.00,
-        unit: "per jar",
-        location: "7.8 miles away",
-        rating: 5.0,
-        image: "🍯",
-        category: "Pantry",
-        description: "Unfiltered, raw honey from local wildflowers.",
-        quantity: "40 jars available",
-        harvestDate: "Harvested: May 20"
-    },
-    {
-        id: 10,
-        name: "Fresh Basil",
-        seller: "Herb Haven",
-        price: 2.00,
-        unit: "per bunch",
-        location: "2.0 miles away",
-        rating: 4.7,
-        image: "🌿",
-        category: "Herbs",
-        description: "Aromatic basil, perfect for salads and pesto.",
-        quantity: "150 bunches available",
-        harvestDate: "Harvested: Today"
-    },
-    {
-        id: 11,
-        name: "Zucchini",
-        seller: "Green Valley Farm",
-        price: 1.60,
-        unit: "per lb",
-        location: "Springfield",
-        rating: 4.5,
-        image: "🥒",
-        category: "Vegetables",
-        description: "Tender zucchini, great for grilling or baking.",
-        quantity: "250 lbs available",
-        harvestDate: "Harvested: May 23"
-    },
-    {
-        id: 12,
-        name: "Gala Apples",
-        seller: "Apple Orchard",
-        price: 2.20,
-        unit: "per lb",
-        location: "9.1 miles away",
-        rating: 4.8,
-        image: "🍎",
-        category: "Fruits",
-        description: "Crisp, sweet Gala apples, freshly picked.",
-        quantity: "300 lbs available",
-        harvestDate: "Harvested: May 22"
-    }
-];
 
 const MarketplacePage = () => {
   const [cartItems, setCartItems] = useState([]);
+   const [marketplaceItems, setMarketplaceItems] = useState([]);
+
+  useEffect(() => {
+    fetch('/marketplaceItems.json')
+      .then((res) => res.json())
+      .then((data) => setMarketplaceItems(data))
+      .catch((err) => {
+        console.error("Failed to fetch marketplace items:", err);
+        setMarketplaceItems([]); 
+      });
+  }, []);
   const addToCart = (item) => {
     setCartItems((prev) => [...prev, item]);
   };
