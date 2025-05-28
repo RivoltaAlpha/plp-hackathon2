@@ -4,8 +4,15 @@ import { Mail, Lock, Eye, EyeOff, Smartphone } from 'lucide-react';
 const LoginPage = ({ onLogin, onSwitchToRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
 
+
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center "
+          style={{backgroundImage:"url('https://img.freepik.com/free-photo/side-view-women-working-outdoors_52683-101228.jpg?uid=R154664640&semt=ais_hybrid&w=740')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform hover:scale-105 transition-transform duration-300">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">

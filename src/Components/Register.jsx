@@ -5,7 +5,12 @@ const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 flex items-center justify-center p-4"
+      style={{backgroundImage:"url('https://img.freepik.com/free-photo/front-view-smiley-woman-holding-box_23-2149894706.jpg?uid=R154664640&semt=ais_hybrid&w=740')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg transform hover:scale-105 transition-transform duration-300">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
