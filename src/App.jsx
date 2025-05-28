@@ -1,57 +1,38 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-// import React from 'react';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// // import AppRoutes from './routes/AppRoutes';
-// import { AuthProvider } from './Auth/AuthContext';
-// import Header from './Components/Header';
-// import Footer from './Components/Footer';
-// import FarmConnect from './FarmConnect'
-
-// function App() {
-//   return (
-//     <Router>
-//       <AuthProvider>
-//         <div className="flex flex-col min-h-screen bg-gray-50">
-//           <Header />
-//           <main className="flex-grow container mx-auto px-4 py-6">
-//             {/* <AppRoutes /> */}
-//             <FarmConnect />
-//           </main>
-//           <Footer />
-//         </div>
-//       </AuthProvider>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
-import React, { useState, useEffect } from 'react';
+import './App.css'
+import { Route, BrowserRouter as Router, Routes, useNavigate } from 'react-router-dom';
+import { AuthProvider } from './Auth/AuthContext';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import UserDashboard from './pages/userComponents';
+import AgritechLanding from './pages/Landing';
 import LoginPage from './Components/Login';
 import RegisterPage from './Components/Register';
 import Dashboard from './pages/dashboard';
 import MarketplacePage from './Components/Market';
+import { useState } from 'react';
 import Navigation from './Components/Navigation';
+import { useEffect } from 'react';
+import Buyers from './Components/Buyers';
 
-const App = () => {
-  const [currentView, setCurrentView] = useState('login');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [notifications, setNotifications] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-  const [userProfile, setUserProfile] = useState({
-    name: "Maria Santos",
-    location: "Central Valley, CA",
-    crops: ["Tomatoes", "Bell Peppers", "Carrots"],
-    farmSize: "12 acres"
-  });
 
-  // Mock market data with AI predictions
+
+function App() {
+    const [currentView, setCurrentView] = useState('landing');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [notifications, setNotifications] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
+    const [userProfile, setUserProfile] = useState({
+      name: "Maria Santos",
+      location: "Central Valley, CA",
+      crops: ["Tomatoes", "Bell Peppers", "Carrots"],
+      farmSize: "12 acres"
+    });
+
+    // Mock market data with AI predictions
   const [marketData, setMarketData] = useState([
     {
       crop: "Tomatoes",
+      image: "https://img.freepik.com/premium-photo/tomato-vegetables-isolated-white-fresh-tomato-fruit-clipping-path-tomato-macro-photo_299651-600.jpg?uid=R154664640&semt=ais_hybrid&w=740",
       currentPrice: 2.85,
       predictedPrice: 3.20,
       trend: "up",
@@ -118,88 +99,93 @@ const App = () => {
     }
   ]);
 
-  // Mock marketplace products
-  const [marketplaceItems, setMarketplaceItems] = useState([
-    {
-      id: 1,
-      name: "Organic Tomatoes",
-      seller: "Green Valley Farm",
-      price: 2.85,
-      unit: "per lb",
-      location: "2.3 miles away",
-      rating: 4.8,
-      image: "🍅",
-      category: "Vegetables",
-      description: "Fresh, organic heirloom tomatoes harvested daily",
-      quantity: "500 lbs available",
-      harvestDate: "Today"
-    },
-    {
-      id: 2,
-      name: "Bell Peppers Mix",
-      seller: "Sunrise Organics",
-      price: 1.95,
-      unit: "per lb",
-      location: "4.1 miles away",
-      rating: 4.9,
-      image: "🫑",
-      category: "Vegetables",
-      description: "Colorful mix of red, yellow, and green bell peppers",
-      quantity: "300 lbs available",
-      harvestDate: "Yesterday"
-    },
-    {
-      id: 3,
-      name: "Baby Carrots",
-      seller: "Mountain View Farm",
-      price: 1.40,
-      unit: "per lb",
-      location: "6.7 miles away",
-      rating: 4.7,
-      image: "🥕",
-      category: "Vegetables",
-      description: "Sweet baby carrots, perfect for retail or restaurants",
-      quantity: "800 lbs available",
-      harvestDate: "2 days ago"
-    },
-    {
-      id: 4,
-      name: "Fresh Lettuce",
-      seller: "Organic Fields Co",
-      price: 1.25,
-      unit: "per head",
-      location: "1.8 miles away",
-      rating: 4.6,
-      image: "🥬",
-      category: "Leafy Greens",
-      description: "Crisp romaine and butter lettuce varieties",
-      quantity: "200 heads available",
-      harvestDate: "Today"
-    }
-  ]);
+   // Mock marketplace products
+    const [marketplaceItems, setMarketplaceItems] = useState([
+      {
+        id: 1,
+        name: "Organic Tomatoes",
+        seller: "Green Valley Farm",
+        price: 2.85,
+        unit: "per lb",
+        location: "2.3 miles away",
+        rating: 4.8,
+        image: "🍅",
+        category: "Vegetables",
+        description: "Fresh, organic heirloom tomatoes harvested daily",
+        quantity: "500 lbs available",
+        harvestDate: "Today"
+      },
+      {
+        id: 2,
+        name: "Bell Peppers Mix",
+        seller: "Sunrise Organics",
+        price: 1.95,
+        unit: "per lb",
+        location: "4.1 miles away",
+        rating: 4.9,
+        image: "🫑",
+        category: "Vegetables",
+        description: "Colorful mix of red, yellow, and green bell peppers",
+        quantity: "300 lbs available",
+        harvestDate: "Yesterday"
+      },
+      {
+        id: 3,
+        name: "Baby Carrots",
+        seller: "Mountain View Farm",
+        price: 1.40,
+        unit: "per lb",
+        location: "6.7 miles away",
+        rating: 4.7,
+        image: "🥕",
+        category: "Vegetables",
+        description: "Sweet baby carrots, perfect for retail or restaurants",
+        quantity: "800 lbs available",
+        harvestDate: "2 days ago"
+      },
+      {
+        id: 4,
+        name: "Fresh Lettuce",
+        seller: "Organic Fields Co",
+        price: 1.25,
+        unit: "per head",
+        location: "1.8 miles away",
+        rating: 4.6,
+        image: "🥬",
+        category: "Leafy Greens",
+        description: "Crisp romaine and butter lettuce varieties",
+        quantity: "200 heads available",
+        harvestDate: "Today"
+      }
+    ]);
+  
+    // Simulated real-time notifications
+    useEffect(() => {
+      if (isLoggedIn) {
+        const timer = setInterval(() => {
+          const newNotifications = [
+            "🔥 URGENT: Tomato prices up 8% at Downtown Market - Act now!",
+            "📈 AI Prediction: Carrot demand spike expected in 2 days",
+            "🤝 New buyer match: RestaurantChain247 wants your bell peppers",
+            "⚡ Flash opportunity: Premium organic buyer within 5 miles"
+          ];
+          
+          setNotifications(prev => {
+            const randomNotif = newNotifications[Math.floor(Math.random() * newNotifications.length)];
+            return [randomNotif, ...prev.slice(0, 2)];
+          });
+        }, 8000);
+  
+        return () => clearInterval(timer);
+      }
+    }, [isLoggedIn]);
 
-  // Simulated real-time notifications
-  useEffect(() => {
-    if (isLoggedIn) {
-      const timer = setInterval(() => {
-        const newNotifications = [
-          "🔥 URGENT: Tomato prices up 8% at Downtown Market - Act now!",
-          "📈 AI Prediction: Carrot demand spike expected in 2 days",
-          "🤝 New buyer match: RestaurantChain247 wants your bell peppers",
-          "⚡ Flash opportunity: Premium organic buyer within 5 miles"
-        ];
-        
-        setNotifications(prev => {
-          const randomNotif = newNotifications[Math.floor(Math.random() * newNotifications.length)];
-          return [randomNotif, ...prev.slice(0, 2)];
-        });
-      }, 8000);
+      const addToCart = (item) => {
+    setCartItems(prev => [...prev, item]);
+  };
 
-      return () => clearInterval(timer);
-    }
-  }, [isLoggedIn]);
 
-  const handleLogin = (e) => {
+    const handleLogin = (e) => {
     e.preventDefault();
     setIsLoggedIn(true);
     setCurrentView('dashboard');
@@ -211,9 +197,6 @@ const App = () => {
     setCurrentView('dashboard');
   };
 
-  const addToCart = (item) => {
-    setCartItems(prev => [...prev, item]);
-  };
 
   // Show auth pages if not logged in
   if (!isLoggedIn) {
@@ -233,40 +216,66 @@ const App = () => {
       );
     }
   }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
-      <div className="max-w-7xl mx-auto">
-        <Navigation 
-          currentView={currentView}
-          setCurrentView={setCurrentView}
-          notifications={notifications}
-        />
+    <>
+      <div className="min-h-screen bg-gray-900 py-10">
+        <div className="max-w-7xl mx-auto">
+          {currentView === 'landing' && (
+            <AgritechLanding
+              setCurrentView={setCurrentView}
+              userProfile={userProfile}
+              notifications={notifications}
+            />
+          )}
 
-        {/* Main Content */}
-        {currentView === 'dashboard' && (
-          <Dashboard 
-            userProfile={userProfile}
-            marketData={marketData}
-            notifications={notifications}
-          />
-        )}
-        
-        {currentView === 'marketplace' && (
-          <MarketplacePage 
-            marketplaceItems={marketplaceItems}
-            cartItems={cartItems}
-            addToCart={addToCart}
-          />
-        )}
-        
-        {currentView === 'buyers' && (
-          <div className="bg-white rounded-xl p-6 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">Buyer Network</h2>
-            <p className="text-gray-600">Connect with verified buyers in your area...</p>
-          </div>
-        )}
-      </div>
+          {currentView !== 'landing' && (
+            <Navigation
+              currentView={currentView}
+              setCurrentView={setCurrentView}
+              notifications={notifications}
+            />
+          )}
+
+          {currentView === 'login' && (
+            <LoginPage
+              onLogin={handleLogin}
+              onSwitchToRegister={() => setCurrentView('register')}
+              onBackToLanding={() => setCurrentView('landing')}
+            />
+          )}
+
+          {currentView === 'register' && (
+            <RegisterPage
+              onRegister={handleRegister}
+              onSwitchToLogin={() => setCurrentView('login')}
+              onBackToLanding={() => setCurrentView('landing')}
+            />
+          )}
+
+          {isLoggedIn && currentView === 'dashboard' && (
+            <Dashboard
+              userProfile={userProfile}
+              marketData={marketData}
+              notifications={notifications}
+            />
+          )}
+
+          {isLoggedIn && currentView === 'marketplace' && (
+            <MarketplacePage
+              marketplaceItems={marketplaceItems}
+              cartItems={cartItems}
+              addToCart={addToCart}
+            />
+          )}
+
+          {isLoggedIn && currentView === 'buyers' && (
+            <Buyers
+              userProfile={userProfile}
+              notifications={notifications}
+              setCurrentView={setCurrentView}
+            />
+          )}
+        </div>
 
     <style>{`
       @keyframes fadeIn {
@@ -278,7 +287,10 @@ const App = () => {
       }
     `}</style>
     </div>
+    <Footer />
+    </>
   );
-};
+}
 
 export default App;
+// export { UserDashboard, App }; // Export UserDashboard for standalone use
