@@ -205,7 +205,7 @@ const UserDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4">
+    <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <Navigation 
           currentView={currentView}

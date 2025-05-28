@@ -1,11 +1,11 @@
 import { TrendingUp, ChevronRight } from 'lucide-react'; 
 
   const PriceCard = ({ crop, data }) => (
-    <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div className="bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="text-xl font-bold text-gray-800">{crop}</h3>
-          <p className="text-gray-600">Per pound</p>
+          <h3 className="text-xl font-bold text-gray-100">{crop}</h3>
+          <p className="text-gray-100">Per pound</p>
         </div>
         <div className={`p-2 rounded-full ${data.trend === 'up' ? 'bg-green-100' : 'bg-red-100'}`}>
           <TrendingUp className={`w-5 h-5 ${data.trend === 'up' ? 'text-green-600' : 'text-red-600 rotate-180'}`} />
@@ -14,12 +14,12 @@ import { TrendingUp, ChevronRight } from 'lucide-react';
       
       <div className="space-y-3">
         <div className="flex justify-between items-center">
-          <span className="text-gray-600">Current Price:</span>
-          <span className="text-2xl font-bold text-gray-800">${data.currentPrice}</span>
+          <span className="text-gray-100">Current Price:</span>
+          <span className="text-2xl font-bold text-gray-100">${data.currentPrice}</span>
         </div>
         
         <div className="flex justify-between items-center">
-          <span className="text-gray-600">AI Prediction:</span>
+          <span className="text-gray-100">AI Prediction:</span>
           <span className={`text-xl font-bold ${data.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
             ${data.predictedPrice}
           </span>
@@ -39,7 +39,7 @@ import { TrendingUp, ChevronRight } from 'lucide-react';
         </div>
         
         <div className="pt-2 border-t border-gray-100">
-          <p className="text-sm text-gray-700 leading-relaxed">{data.aiInsight}</p>
+          <p className="text-sm text-gray-100 leading-relaxed">{data.aiInsight}</p>
         </div>
         
         <button className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-lg font-semibold hover:from-green-600 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-2">
