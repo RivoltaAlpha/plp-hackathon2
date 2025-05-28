@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 // Create the authentication context
 export const AuthContext = createContext();
@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     }
     setLoading(false);
   }, []);
+
 
   // Login function
   const login = async (email, password) => {
