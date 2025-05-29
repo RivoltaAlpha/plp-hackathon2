@@ -1,18 +1,5 @@
 ---
-theme: seriph
-background: https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=1740&auto=format&fit=crop
-title: Agritech Market Match - Kenya
-info: |
-  ## Agritech Market Match Platform
-  Empowering Kenyan farmers with market information.
-class: text-center
-drawings:
-  persist: false
-transition: slide-left
-mdc: true
-overview: true
-download: true
-css: ['./style.css']
+Pitch: https://hackathon2-pitch.vercel.app/
 ---
 
 # Agritech Market Match
